@@ -1,6 +1,6 @@
 package org.graphml.writer;
 
-import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Collection;
 
 import javax.xml.stream.XMLOutputFactory;
@@ -18,7 +18,7 @@ public class GraphWriter {
 	protected int openElements = 0;
 	protected int idSequence;
 	protected final ElementWriter elementWriter = new InternalWriter();
-	public GraphWriter(FileOutputStream fileOutputStream, String name) {
+	public GraphWriter(OutputStream fileOutputStream, String name) {
 		XMLOutputFactory xof = XMLOutputFactory.newInstance();
 		try {
 			xtw = xof.createXMLStreamWriter(fileOutputStream, name);
