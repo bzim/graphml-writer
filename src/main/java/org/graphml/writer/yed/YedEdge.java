@@ -4,10 +4,10 @@ import org.graphml.writer.model.AbstractBaseEdge;
 import org.graphml.writer.model.ElementWriter;
 import org.graphml.writer.yed.graphics.EdgeGraphics;
 
-public class YedEdge extends AbstractBaseEdge {
-	public final EdgeGraphics edgeGraphics;
+public class YedEdge<T extends EdgeGraphics> extends AbstractBaseEdge {
+	public final T edgeGraphics;
 
-	public YedEdge(final EdgeGraphics edgeGraphics) {
+	public YedEdge(final T edgeGraphics) {
 		this.edgeGraphics = edgeGraphics;
 	}
 

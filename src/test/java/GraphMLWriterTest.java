@@ -43,8 +43,8 @@ public class GraphMLWriterTest {
 		edgeGraphics.addLabel(EdgeLabel.centered("flow"));
 		edgeGraphics.addLabel(EdgeLabel.targetHead("target"));
 		
-		YedEdge
-			edge = new YedEdge(edgeGraphics);
+		YedEdge<PolyLineEdge>
+			edge = new YedEdge<>(edgeGraphics);
 		graphWriter.edge(edge, graphWriter.getNextId(), "2", "1");
 		graphWriter.endGraph();
 		graphWriter.endDocument();
@@ -76,8 +76,8 @@ public class GraphMLWriterTest {
 		edgeLabel.setLabelModel(new RotatedDiscreteEdgeLabelModel());
 
 		edgeGraphics.addLabel(edgeLabel);
-		YedEdge
-			edge = new YedEdge(edgeGraphics);
+		YedEdge<PolyLineEdge>
+			edge = new YedEdge<>(edgeGraphics);
 		graphWriter.edge(edge, graphWriter.getNextId(), "2", "1");
 		
 		graphWriter.endDocument();
@@ -121,8 +121,8 @@ public class GraphMLWriterTest {
 		EdgeLabel edgeLabel = new EdgeLabel("flow");
 		edgeGraphics.addLabel(edgeLabel);
 
-		YedEdge
-			edge = new YedEdge(edgeGraphics);
+		YedEdge<PolyLineEdge>
+			edge = new YedEdge<>(edgeGraphics);
 		
 		graphWriter.edge(edge, graphWriter.getNextId(), "g1", "1");
 		
@@ -148,8 +148,8 @@ public class GraphMLWriterTest {
 		taskShape.geometry.height = 30d;
 		PolyLineEdge
 			edgeGraphics = new PolyLineEdge();
-		YedEdge
-			edge = new YedEdge(edgeGraphics);
+		YedEdge<PolyLineEdge>
+			edge = new YedEdge<>(edgeGraphics);
 		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/big.graphml"),
 				StandardCharsets.UTF_8.name());
 		graphWriter.startDocument();
