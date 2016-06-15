@@ -2,22 +2,23 @@ import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import org.graphml.writer.GraphWriter;
-import org.graphml.writer.yed.YedEdge;
-import org.graphml.writer.yed.YedGroupNode;
-import org.graphml.writer.yed.YedNode;
-import org.graphml.writer.yed.YedKeys;
-import org.graphml.writer.yed.graphics.EdgeLabel;
-import org.graphml.writer.yed.graphics.PolyLineEdge;
-import org.graphml.writer.yed.graphics.ProxyAutoBoundsNode;
-import org.graphml.writer.yed.graphics.RotatedDiscreteEdgeLabelModel;
-import org.graphml.writer.yed.graphics.ShapeNode;
-import org.graphml.writer.yed.style.AutoSizePolicy;
-import org.graphml.writer.yed.style.LineType;
-import org.graphml.writer.yed.style.ModelName;
-import org.graphml.writer.yed.style.ModelPosition;
-import org.graphml.writer.yed.style.ShapeType;
 import org.junit.Test;
+
+import de.graphml.writer.GraphWriter;
+import de.graphml.writer.yed.YedEdge;
+import de.graphml.writer.yed.YedGroupNode;
+import de.graphml.writer.yed.YedKeys;
+import de.graphml.writer.yed.YedNode;
+import de.graphml.writer.yed.graphics.EdgeLabel;
+import de.graphml.writer.yed.graphics.PolyLineEdge;
+import de.graphml.writer.yed.graphics.ProxyAutoBoundsNode;
+import de.graphml.writer.yed.graphics.RotatedDiscreteEdgeLabelModel;
+import de.graphml.writer.yed.graphics.ShapeNode;
+import de.graphml.writer.yed.style.AutoSizePolicy;
+import de.graphml.writer.yed.style.LineType;
+import de.graphml.writer.yed.style.ModelName;
+import de.graphml.writer.yed.style.ModelPosition;
+import de.graphml.writer.yed.style.ShapeType;
 
 public class GraphMLWriterTest {
 	@Test
