@@ -16,7 +16,7 @@ public abstract class AbstractBaseNode implements Node{
 		
 		if (description != null){
 			w.startData(DefaultKeys.DESCRIPTION_FOR_NODE);
-			w.writeText(url);
+			w.writeText(description);
 			w.endElement();
 		}
 

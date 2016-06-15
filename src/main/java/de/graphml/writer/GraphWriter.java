@@ -10,6 +10,7 @@ import javax.xml.stream.XMLStreamWriter;
 import de.graphml.writer.model.DefaultKeys;
 import de.graphml.writer.model.Edge;
 import de.graphml.writer.model.ElementWriter;
+import de.graphml.writer.model.Graph;
 import de.graphml.writer.model.Key;
 import de.graphml.writer.model.Node;
 
@@ -74,30 +75,18 @@ public class GraphWriter {
 		}
 	}
 
-	public String startGraph(boolean defaultDirected) {
-		String graphId = getNextId();
-		startGraph(defaultDirected, graphId);
-		return graphId;
+	public String startGraph(Graph graph){
+		String nextId = getNextId();
+		startGraph(graph, nextId);
+		return nextId;
+	}
+	
+	public void startGraph(Graph graph, String id) {
+		graph.writeStart(elementWriter, id);
 	}
 
-	public void startGraph(boolean defaultDirected, String id) {
-		elementWriter.startElement("graph");
-		try {
-			xtw.writeAttribute("edgedefault", defaultDirected ? "directed" : "undirected");
-			xtw.writeAttribute("id", id);
-		} catch (XMLStreamException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public void description(String description) {
-		elementWriter.startData(DefaultKeys.DESCRIPTON_FOR_GRAPH);
-		elementWriter.writeText(description);
-		elementWriter.endElement();
-	}
-
-	public void endGraph() {
-		elementWriter.endElement();
+	public void endGraph(Graph graph) {
+		graph.writeEnd(elementWriter);
 	}
 
 	public void endDocument() {

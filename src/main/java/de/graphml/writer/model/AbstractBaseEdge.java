@@ -19,7 +19,7 @@ public abstract class AbstractBaseEdge implements Edge{
 		
 		if (description != null){
 			w.startData(DefaultKeys.DESCRIPTION_FOR_EDGE);
-			w.writeText(url);
+			w.writeText(description);
 			w.endElement();
 		}
 

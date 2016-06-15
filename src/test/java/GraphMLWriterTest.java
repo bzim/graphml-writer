@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import de.graphml.writer.GraphWriter;
+import de.graphml.writer.model.BaseGraph;
 import de.graphml.writer.yed.YedEdge;
 import de.graphml.writer.yed.YedGroupNode;
 import de.graphml.writer.yed.YedKeys;
@@ -28,14 +29,16 @@ public class GraphMLWriterTest {
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 
-		graphWriter.startGraph(true);
-		graphWriter.description("This is a description");
+		graphWriter.startGraph(BaseGraph.DIRECTED);
 		YedNode<ShapeNode> node = new YedNode<>(ShapeNode.asRectangle(0d, 0d, 250d, 30d, "Data"));
+		// write the node
 		graphWriter.node(node, graphWriter.getNextId());
 		
 		// re-set text for next node
 		node.nodeGraphics.label.text = "Task1";
+		// adjust y coordinate
 		node.nodeGraphics.geometry.y = 250d;
+		// write the next node
 		graphWriter.node(node, graphWriter.getNextId());
 		
 		PolyLineEdge
@@ -46,8 +49,9 @@ public class GraphMLWriterTest {
 		
 		YedEdge<PolyLineEdge>
 			edge = new YedEdge<>(edgeGraphics);
+		// write the edge, connecting from node "2" to "1"
 		graphWriter.edge(edge, graphWriter.getNextId(), "2", "1");
-		graphWriter.endGraph();
+		graphWriter.endGraph(BaseGraph.DIRECTED);
 		graphWriter.endDocument();
 
 		TestUtils.formatXMLFile("target/simple.graphml");
@@ -60,7 +64,7 @@ public class GraphMLWriterTest {
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 
-		graphWriter.startGraph(true);
+		graphWriter.startGraph(BaseGraph.DIRECTED);
 		ShapeNode nodeGraphics = ShapeNode.asRectangle(250d, 30d, "Data");
 		YedNode<ShapeNode> node = new YedNode<>(nodeGraphics);
 		
@@ -81,6 +85,7 @@ public class GraphMLWriterTest {
 			edge = new YedEdge<>(edgeGraphics);
 		graphWriter.edge(edge, graphWriter.getNextId(), "2", "1");
 		
+		graphWriter.endGraph(BaseGraph.DIRECTED);
 		graphWriter.endDocument();
 
 		TestUtils.formatXMLFile("target/simple_rotating_edgelabel.graphml");
@@ -95,7 +100,7 @@ public class GraphMLWriterTest {
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 
-		graphWriter.startGraph(true);
+		graphWriter.startGraph(BaseGraph.DIRECTED);
 		ShapeNode nodeGraphics = ShapeNode.asRectangle(250d, 30d, "Data");
 		YedNode<ShapeNode> node = new YedNode<>(nodeGraphics);
 		graphWriter.node(node, graphWriter.getNextId());
@@ -107,14 +112,14 @@ public class GraphMLWriterTest {
 		groupNodeShape.groupNode.label.autoSizePolicy = AutoSizePolicy.NODE_WIDTH;
 		groupNodeShape.groupNode.label.text = "test";
 		graphWriter.startNode(graphicsGroupNode, "g1");
-		graphWriter.startGraph(true);
+		graphWriter.startGraph(BaseGraph.DIRECTED);
 		{
 			nodeGraphics.label.text = "Sub Data 1";
 			graphWriter.node(node, graphWriter.getNextId());
 			nodeGraphics.label.text = "Sub Data 2";
 			graphWriter.node(node, graphWriter.getNextId());
 		}
-		graphWriter.endGraph();
+		graphWriter.endGraph(BaseGraph.DIRECTED);
 		graphWriter.endNode(graphicsGroupNode);
 		PolyLineEdge
 			edgeGraphics = new PolyLineEdge();
@@ -127,7 +132,7 @@ public class GraphMLWriterTest {
 		
 		graphWriter.edge(edge, graphWriter.getNextId(), "g1", "1");
 		
-		graphWriter.endGraph();
+		graphWriter.endGraph(BaseGraph.DIRECTED);
 		graphWriter.endDocument();
 
 		TestUtils.formatXMLFile("target/subgraph.graphml");
@@ -156,7 +161,7 @@ public class GraphMLWriterTest {
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 
-		graphWriter.startGraph(true);
+		graphWriter.startGraph(BaseGraph.DIRECTED);
 
 		String oldTaskNodeId=null;
 		
@@ -177,6 +182,7 @@ public class GraphMLWriterTest {
 			}
 			
 		}
+		graphWriter.endGraph(BaseGraph.DIRECTED);
 		graphWriter.endDocument();
 		TestUtils.formatXMLFile("target/big.graphml");
 	}

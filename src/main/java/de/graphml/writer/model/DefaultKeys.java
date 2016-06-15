@@ -1,7 +1,7 @@
 package de.graphml.writer.model;
 
 public enum DefaultKeys implements Key{
-	DESCRIPTON_FOR_GRAPH("d0", "graph", "attr.name", "Beschreibung", "attr.type", "string"),
+	DESCRIPTION_FOR_GRAPH("d0", "graph", "attr.name", "Beschreibung", "attr.type", "string"),
 	URL_FOR_NODE("d4", "node", "attr.name", "url", "attr.type", "string"),
 	DESCRIPTION_FOR_NODE("d5", "node", "attr.name", "description", "attr.type", "string"),
 	URL_FOR_EDGE("d8", "edge", "attr.name", "url", "attr.type", "string"),
