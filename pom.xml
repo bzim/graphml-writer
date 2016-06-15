@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.graphml.writer</groupId>
 	<artifactId>graphml-writer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>GraphML Writer</name>
 	<description>A simple writer for the graphml file format</description>
