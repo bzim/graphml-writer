@@ -1,17 +1,24 @@
-# graphml-writer
-The GraphML Writer Library is intended to be used as a sequential writer for the GraphML file format (http://graphml.graphdrawing.org). 
-This library just writes xml nodes, graphs and edges with necessary namespace initialization ahead. 
+graphml-writer
+==============
+
+The library is intended to be used as a sequential writer for the GraphML file format:
+
+http://graphml.graphdrawing.org
+
+This library writes XML nodes, graphs and edges with necessary namespace initialization ahead.
+ 
 There is explicitly no graph model, complex layout logic or any other fancy stuff. This library just writes.
 Typically this is where you start with: 
 
 1. Build a nice graph model with any of the freely available libraries or your own
 2. Do some operations on the graph, express your relations etc.
-3. Use this library to write a representational graphML file
+3. Use this library to write a representational GraphML file
 4. View it in an external tool, like yEd or any other graphML supporting renderer
 
 Furthermore it has some support for writing yEd compatible nodes and edges which are displayable via the great yEd (http://www.yworks.com/products/yed) tool.
  
-## Example Code to render a simple Graph
+Example Code to render a simple Graph
+=====================================
 
 ```java
 
@@ -48,16 +55,22 @@ graphWriter.endDocument();
 ```
 
 ![](https://github.com/bzim/graphml-writer/blob/develop/doc/images/simple.jpg)
-[Resulting Graph, viewed in yEd]
 
-## To use the graphml-writer within Maven Projects
+[Resulting graph, viewed in yEd]
+
+Dependency for maven projects
+============================================
 
 ```xml
 
 	<dependency>
 		<groupId>de.graphml.writer</groupId>
 		<artifactId>graphml-writer</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3</version>
 	</dependency>
 		
 ```
+
+Other
+=====
+Travis CI: [![Build Status](https://travis-ci.org/bzim/graphml-writer.svg?branch=develop)](https://travis-ci.org/bzim/graphml-writer)
