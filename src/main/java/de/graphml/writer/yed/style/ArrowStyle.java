@@ -17,7 +17,7 @@
 package de.graphml.writer.yed.style;
 
 public enum ArrowStyle {
-	NONE("node"),
+	NONE("none"),
 	STANDARD("standard"),
 	DELTA("delta"),
 	WHITE_DELTA("white_delta"),
