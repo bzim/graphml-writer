@@ -14,31 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.graphml.writer.yed.graphics;
+package de.graphml.writer.yed.style;
 
-import de.graphml.writer.model.ElementWriter;
-import de.graphml.writer.yed.YedConstants;
-
-public class NodeLabel extends AbstractBaseLabel implements LeafRenderable, YedConstants {
-	
-	public NodeLabel(){
+public enum FontStyle {
+	PLAIN("plain"),
+	BOLD("bold"),
+	ITALIC("italic"),
+	BOLD_ITALIC("bolditalic");
+	public final String value;
+	FontStyle(String value){
+		this.value = value;
 	}
-
-	public NodeLabel(String text){
-		this.text = text;
-	}
-	@Override
-	public void writeTo(ElementWriter w) {
-		if (text == null){
-			return;
-		}
-		w.startElement(Y, "NodeLabel");
-		writerAttributes(w);
-		w.writeText(text);
-		w.endElement();
-	}
-/*	
-    <y:NodeLabel 
-    borderDistance="0.0" 
-*/
 }

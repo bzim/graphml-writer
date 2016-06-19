@@ -35,7 +35,7 @@ public class ShapeNode extends AbstractNodeGraphicsBase implements NodeGraphics,
 		nodeGraphics.geometry.y = y;
 		nodeGraphics.geometry.width = width;
 		nodeGraphics.geometry.height = height;
-		nodeGraphics.label.text = text;
+		nodeGraphics.addLabel(new NodeLabel(text));
 		return nodeGraphics;
 	}	
 
@@ -43,7 +43,7 @@ public class ShapeNode extends AbstractNodeGraphicsBase implements NodeGraphics,
 		ShapeNode nodeGraphics = new ShapeNode();
 		nodeGraphics.geometry.width = width;
 		nodeGraphics.geometry.height = height;
-		nodeGraphics.label.text = text;
+		nodeGraphics.addLabel(new NodeLabel(text));
 		return nodeGraphics;
 	}	
 }

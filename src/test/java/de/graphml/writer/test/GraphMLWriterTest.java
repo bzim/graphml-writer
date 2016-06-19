@@ -28,6 +28,9 @@ import de.graphml.writer.yed.YedGroupNode;
 import de.graphml.writer.yed.YedKeys;
 import de.graphml.writer.yed.YedNode;
 import de.graphml.writer.yed.graphics.EdgeLabel;
+import de.graphml.writer.yed.graphics.GenericNode;
+import de.graphml.writer.yed.graphics.GenericNode.Configuration;
+import de.graphml.writer.yed.graphics.NodeLabel;
 import de.graphml.writer.yed.graphics.PolyLineEdge;
 import de.graphml.writer.yed.graphics.ProxyAutoBoundsNode;
 import de.graphml.writer.yed.graphics.RotatedDiscreteEdgeLabelModel;
@@ -52,7 +55,7 @@ public class GraphMLWriterTest {
 		graphWriter.node(node, graphWriter.getNextId());
 		
 		// re-set text for next node
-		node.nodeGraphics.label.text = "Task1";
+		node.nodeGraphics.firstLabel().text = "Task1";
 		// adjust y coordinate
 		node.nodeGraphics.geometry.y = 250d;
 		// write the next node
@@ -75,6 +78,57 @@ public class GraphMLWriterTest {
 	}
 
 	@Test
+	public void writeFlowChart() throws Exception {
+		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/flowChart.graphml"),
+				StandardCharsets.UTF_8.name());
+		graphWriter.startDocument();
+		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
+
+		graphWriter.startGraph(BaseGraph.DIRECTED);
+		YedNode<GenericNode> node = new YedNode<>(GenericNode.as(Configuration.FLOWCHART_START1, "Start"));
+		node.nodeGraphics.geometry.y = 0d;
+		node.nodeGraphics.fill.color = "#669999";
+		node.nodeGraphics.fill.color2 = "#407F7F";
+		// write the node
+		graphWriter.node(node, graphWriter.getNextId());
+		
+		node.nodeGraphics.withConfigurationAndLabelText(Configuration.FLOWCHART_DATA, "Input");
+		
+		// adjust y coordinate
+		node.nodeGraphics.geometry.y += 100d;
+		// write the next node
+		graphWriter.node(node, graphWriter.getNextId());
+
+		node.nodeGraphics.withConfigurationAndLabelText(Configuration.FLOWCHART_PROCESS, "Process");
+		
+		// adjust y coordinate
+		node.nodeGraphics.geometry.y += 100d;
+		// write the next node
+		graphWriter.node(node, graphWriter.getNextId());
+
+		node.nodeGraphics.withConfigurationAndLabelText(Configuration.FLOWCHART_TERMINATOR, "End");
+		// adjust y coordinate
+		node.nodeGraphics.geometry.y += 100d;
+		// write the next node
+		graphWriter.node(node, graphWriter.getNextId());		
+		
+		PolyLineEdge
+			edgeGraphics = new PolyLineEdge();
+		
+		YedEdge<PolyLineEdge>
+			edge = new YedEdge<>(edgeGraphics);
+
+		graphWriter.edge(edge, graphWriter.getNextId(), "1", "2");
+		graphWriter.edge(edge, graphWriter.getNextId(), "2", "3");
+		graphWriter.edge(edge, graphWriter.getNextId(), "3", "4");
+		graphWriter.endGraph(BaseGraph.DIRECTED);
+		graphWriter.endDocument();
+
+		TestUtils.formatXMLFile("target/flowChart.graphml");
+	}
+
+	
+	@Test
 	public void writeSimpleGraphRotatingEdgeLabel() throws Exception {
 		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/simple_rotating_edgelabel.graphml"),
 				StandardCharsets.UTF_8.name());
@@ -87,7 +141,7 @@ public class GraphMLWriterTest {
 		
 		graphWriter.node(node, graphWriter.getNextId());
 				
-		nodeGraphics.label.text = "Task1";
+		nodeGraphics.firstLabel().text = "Task1";
 		nodeGraphics.shape.shapeType = ShapeType.HEXAGON;
 		nodeGraphics.geometry.width = 150d;
 
@@ -124,16 +178,17 @@ public class GraphMLWriterTest {
 
 		ProxyAutoBoundsNode groupNodeShape = new ProxyAutoBoundsNode();
 		YedGroupNode<ProxyAutoBoundsNode> graphicsGroupNode = new YedGroupNode<>(groupNodeShape);
-		groupNodeShape.groupNode.label.modelName = ModelName.INTERNAL;
-		groupNodeShape.groupNode.label.modelPosition = ModelPosition.TOP;
-		groupNodeShape.groupNode.label.autoSizePolicy = AutoSizePolicy.NODE_WIDTH;
-		groupNodeShape.groupNode.label.text = "test";
+		NodeLabel nodeLabel = groupNodeShape.groupNode.firstLabel();
+		nodeLabel.modelName = ModelName.INTERNAL;
+		nodeLabel.modelPosition = ModelPosition.TOP;
+		nodeLabel.autoSizePolicy = AutoSizePolicy.NODE_WIDTH;
+		nodeLabel.text = "test";
 		graphWriter.startNode(graphicsGroupNode, "g1");
 		graphWriter.startGraph(BaseGraph.DIRECTED);
 		{
-			nodeGraphics.label.text = "Sub Data 1";
+			nodeGraphics.firstLabel().text = "Sub Data 1";
 			graphWriter.node(node, graphWriter.getNextId());
-			nodeGraphics.label.text = "Sub Data 2";
+			nodeGraphics.firstLabel().text = "Sub Data 2";
 			graphWriter.node(node, graphWriter.getNextId());
 		}
 		graphWriter.endGraph(BaseGraph.DIRECTED);
@@ -183,7 +238,7 @@ public class GraphMLWriterTest {
 		String oldTaskNodeId=null;
 		
 		for (int i=0; i < 100; i++){
-			taskShape.label.text = ""+i;
+			taskShape.firstLabel().text = ""+i;
 			String taskNodeId = graphWriter.getNextId();
 			graphWriter.node(taskNode, taskNodeId);
 			if(oldTaskNodeId != null){
@@ -192,7 +247,7 @@ public class GraphMLWriterTest {
 			oldTaskNodeId = taskNodeId;
 			
 			for (int n=0; n < 3; n++){
-				dataShape.label.text = "Data";
+				dataShape.firstLabel().text = "Data";
 				String dataNodeId = graphWriter.getNextId();
 				graphWriter.node(dataNode, dataNodeId);
 				graphWriter.edge(edge, graphWriter.getNextId(), taskNodeId, dataNodeId);

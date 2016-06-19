@@ -20,8 +20,8 @@ import de.graphml.writer.model.ElementWriter;
 import de.graphml.writer.yed.YedConstants;
 
 public class Geometry implements LeafRenderable, YedConstants {
-	public Double width=100d;
-	public Double height=100d;
+	public Double width;
+	public Double height;
 	public Double x;
 	public Double y;
 	@Override

@@ -20,6 +20,7 @@ import java.util.List;
 
 import de.graphml.writer.model.ElementWriter;
 import de.graphml.writer.yed.YedConstants;
+import de.graphml.writer.yed.style.ArrowStyle;
 import de.graphml.writer.yed.style.LineType;
 
 public class PolyLineEdge implements EdgeGraphics, YedConstants{
@@ -30,6 +31,8 @@ public class PolyLineEdge implements EdgeGraphics, YedConstants{
 	public Double lineWidth=1.0;
 	public LineType lineType = LineType.LINE;
 	public List<EdgeLabel> labels;
+	public ArrowStyle source = ArrowStyle.NONE;
+	public ArrowStyle target = ArrowStyle.STANDARD;
 
 	@Override
 	public void writeTo(ElementWriter w) {
@@ -49,9 +52,9 @@ public class PolyLineEdge implements EdgeGraphics, YedConstants{
 		w.endElement();
 
 		w.startElement(Y, "Arrows");
-		w.writeAttribute("source", "none");
+		w.writeAttribute("source", source.value);
 		w.writeAttribute("type", "line");
-		w.writeAttribute("target", "standard");
+		w.writeAttribute("target", target.value);
 		w.endElement();		
 		
 		if (labels != null){

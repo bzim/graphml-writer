@@ -16,6 +16,9 @@
  */
 package de.graphml.writer.yed.graphics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.graphml.writer.model.ElementWriter;
 import de.graphml.writer.yed.style.BorderStyle;
 
@@ -24,15 +27,45 @@ public class AbstractNodeGraphicsBase {
 	public Shape shape= new Shape();
 	public DropShadow dropShadow= new DropShadow();
 	public Fill fill = new Fill();
-	public NodeLabel label = new NodeLabel();
+	public List<NodeLabel> labels;
 	public BorderStyle borderStyle = new BorderStyle();
 	
 	protected void writeGraphics(ElementWriter w) {
 		geometry.writeTo(w);
 		fill.writeTo(w);
 		borderStyle.writeTo(w);
-		label.writeTo(w);
+		if (labels != null){
+			for (NodeLabel label: labels){
+				label.writeTo(w);
+			}
+		}
 		shape.writeTo(w);
   		dropShadow.writeTo(w);
+	}
+	
+	public void addLabel(NodeLabel label){
+		if (labels == null){
+			labels = new ArrayList<>();
+		}
+		labels.add(label);
+	}
+	
+	public NodeLabel firstLabel(){
+		if (hasLabels()){
+			return labels.get(0);
+		}
+		throw new RuntimeException("no label defined on node graphics");
+	}
+
+	public boolean hasLabels() {
+		return labels != null && !labels.isEmpty();
+	}
+	
+	public void withLabelText(String text) {
+		if (!hasLabels()){
+			addLabel(new NodeLabel(text));
+		}else{
+			firstLabel().text = text;
+		}
 	}
 }

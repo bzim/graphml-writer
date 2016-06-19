@@ -23,6 +23,9 @@ import de.graphml.writer.yed.style.ModelPosition;
 
 public class EdgeLabel extends AbstractBaseLabel implements LeafRenderable, YedConstants {
 	private LabelModel labelModel;
+	public boolean autoFlippingLabel;
+	public Double distance=2.0;
+	public Double ratio=0.5;
 	public EdgeLabel(){
 	}
 	public EdgeLabel(String text){
@@ -41,9 +44,11 @@ public class EdgeLabel extends AbstractBaseLabel implements LeafRenderable, YedC
 		w.startElement(Y, "EdgeLabel");
 		writerAttributes(w);
 		w.writeAttribute("preferredPlacement", "anywhere");
-		w.writeAttribute("configuration", "AutoFlippingLabel");
-		w.writeAttribute("ratio", "0.5");
-		w.writeAttribute("distance", "2.0");
+		if (autoFlippingLabel){
+			w.writeAttribute("configuration", "AutoFlippingLabel");
+		}
+		w.writeAttribute("ratio", ratio);
+		w.writeAttribute("distance", distance);
 		w.writeText(text);
 		if (labelModel != null){
 			w.startElement(Y, "LabelModel");

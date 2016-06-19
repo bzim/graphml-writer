@@ -19,13 +19,14 @@ package de.graphml.writer.yed.graphics;
 import de.graphml.writer.model.ElementWriter;
 import de.graphml.writer.yed.style.Alignment;
 import de.graphml.writer.yed.style.AutoSizePolicy;
+import de.graphml.writer.yed.style.FontStyle;
 import de.graphml.writer.yed.style.ModelName;
 import de.graphml.writer.yed.style.ModelPosition;
 
 public abstract class AbstractBaseLabel {
 	public Integer fontSize = 12;
 	public String fontFamily = "Dialog";
-	public String fontStyle = "plain";
+	public FontStyle fontStyle = FontStyle.PLAIN;
 	public String textColor = "#000000";
 	public Alignment alignment = Alignment.CENTER;
 	public Double width;
@@ -35,6 +36,7 @@ public abstract class AbstractBaseLabel {
 	public String lineColor;
 	public String backgroundColor;
 	public boolean visible = true;
+	public boolean underlinedText;
 	public ModelName modelName = ModelName.CUSTOM;
 	public ModelPosition modelPosition;
 	public AutoSizePolicy autoSizePolicy = AutoSizePolicy.CONTENT;
@@ -50,14 +52,21 @@ public abstract class AbstractBaseLabel {
 		w.writeAttribute("alignment", alignment.value);
 		w.writeAttribute("fontFamily", fontFamily);
 		w.writeAttribute("fontSize", fontSize);
-		w.writeAttribute("fontStyle", fontStyle);
+		w.writeAttribute("fontStyle", fontStyle.value);
 
 		if (backgroundColor == null) {
 			w.writeAttribute("hasBackgroundColor", "false");
+		}else{
+			w.writeAttribute("backgroundColor", backgroundColor);
 		}
 		if (lineColor == null) {
 			w.writeAttribute("hasLineColor", "false");
+		}else{
+			w.writeAttribute("lineColor", lineColor);
 		}
+		
+		w.writeAttribute("underlinedText", underlinedText);
+		
 		w.writeAttribute("modelName", modelName.value);
 		if (modelPosition != null){
 			w.writeAttribute("modelPosition", modelPosition.value);
