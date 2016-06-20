@@ -17,6 +17,7 @@ package de.graphml.writer.test;
  */
 import java.io.FileOutputStream;
 import java.util.Arrays;
+import java.util.zip.GZIPOutputStream;
 
 import org.junit.Test;
 
@@ -229,7 +230,7 @@ public class GraphMLWriterTest {
 		YedEdge<PolyLineEdge>
 			edge = new YedEdge<>(new PolyLineEdge());
 		
-		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/big.graphml"));
+		GraphWriter graphWriter = new GraphWriter(new GZIPOutputStream(new FileOutputStream("target/big.graphmlz"), true));
 		
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
@@ -257,6 +258,5 @@ public class GraphMLWriterTest {
 		}
 		graphWriter.endGraph(BaseGraph.DIRECTED);
 		graphWriter.endDocument();
-		TestUtils.formatXMLFile("target/big.graphml");
 	}
 }
