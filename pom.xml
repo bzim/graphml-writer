@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.graphml.writer</groupId>
 	<artifactId>graphml-writer</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 	<name>GraphML Writer</name>
 	<description>A simple writer for the graphml file format</description>
@@ -23,7 +23,7 @@
 		<connection>scm:git:git@github.com:bzim/graphml-writer.git</connection>
 		<developerConnection>scm:git:git@github.com:bzim/graphml-writer.git</developerConnection>
 		<url>git@github.com:bzim/graphml-writer.git</url>
-	  <tag>graphml-writer-0.0.3</tag>
+	  <tag>graphml-writer-0.1.0</tag>
   </scm>
 	<properties>
 		<java.version>1.8</java.version>
