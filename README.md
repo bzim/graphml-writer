@@ -7,23 +7,24 @@ http://graphml.graphdrawing.org
 
 This library writes XML nodes, graphs and edges with necessary namespace initialization ahead.
  
-There is explicitly no graph model, complex layout logic or any other fancy stuff. This library just writes.
+There is explicitly no graph model, complex layout logic or any other fancy stuff. This library just writes. 
+Note: All objects which define a graphic state could be reused after they are written to the stream, so a minimal processing memory footprint is possible.
+
 Typically this is where you start with: 
 
 1. Build a nice graph model with any of the freely available libraries or your own
 2. Do some operations on the graph, express your relations etc.
 3. Use this library to write a representational GraphML file
-4. View it in an external tool, like yEd or any other graphML supporting renderer
+4. View it in an external tool, like yEd or any other GraphML supporting renderer
 
-Furthermore it has some support for writing yEd compatible nodes and edges which are displayable via the great yEd (http://www.yworks.com/products/yed) tool.
- 
-Example Code to render a simple Graph
+Furthermore it has support for writing yEd (http://www.yworks.com/products/yed) compatible graphic nodes and edges.
+
+Example code to render a simple graph
 =====================================
 
 ```java
 
-	GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/simple.graphml"),
-			StandardCharsets.UTF_8.name());
+	GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/simple.graphml"));
 	graphWriter.startDocument();
 	graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 

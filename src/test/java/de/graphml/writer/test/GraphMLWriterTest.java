@@ -16,7 +16,6 @@ package de.graphml.writer.test;
  * limitations under the License.
  */
 import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -44,8 +43,7 @@ import de.graphml.writer.yed.style.ShapeType;
 public class GraphMLWriterTest {
 	@Test
 	public void writeSimpleGraph() throws Exception {
-		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/simple.graphml"),
-				StandardCharsets.UTF_8.name());
+		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/simple.graphml"));
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 
@@ -79,8 +77,7 @@ public class GraphMLWriterTest {
 
 	@Test
 	public void writeFlowChart() throws Exception {
-		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/flowChart.graphml"),
-				StandardCharsets.UTF_8.name());
+		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/flowChart.graphml"));
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 
@@ -130,8 +127,7 @@ public class GraphMLWriterTest {
 	
 	@Test
 	public void writeSimpleGraphRotatingEdgeLabel() throws Exception {
-		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/simple_rotating_edgelabel.graphml"),
-				StandardCharsets.UTF_8.name());
+		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/simple_rotating_edgelabel.graphml"));
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 
@@ -165,8 +161,7 @@ public class GraphMLWriterTest {
 	
 	@Test
 	public void writeSubGraph() throws Exception {
-		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/subgraph.graphml"),
-				StandardCharsets.UTF_8.name());
+		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/subgraph.graphml"));
 
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
@@ -234,8 +229,7 @@ public class GraphMLWriterTest {
 		YedEdge<PolyLineEdge>
 			edge = new YedEdge<>(new PolyLineEdge());
 		
-		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/big.graphml"),
-				StandardCharsets.UTF_8.name());
+		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/big.graphml"));
 		
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
