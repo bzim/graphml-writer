@@ -177,12 +177,14 @@ public class GraphMLWriterTest {
 		graphWriter.node(node, graphWriter.getNextId());
 
 		ProxyAutoBoundsNode groupNodeShape = new ProxyAutoBoundsNode();
-		YedGroupNode<ProxyAutoBoundsNode> graphicsGroupNode = new YedGroupNode<>(groupNodeShape);
-		NodeLabel nodeLabel = groupNodeShape.groupNode.firstLabel();
+		NodeLabel nodeLabel = new NodeLabel();
 		nodeLabel.modelName = ModelName.INTERNAL;
 		nodeLabel.modelPosition = ModelPosition.TOP;
 		nodeLabel.autoSizePolicy = AutoSizePolicy.NODE_WIDTH;
 		nodeLabel.text = "test";
+		groupNodeShape.groupNode.addLabel(nodeLabel);
+
+		YedGroupNode<ProxyAutoBoundsNode> graphicsGroupNode = new YedGroupNode<>(groupNodeShape);
 		graphWriter.startNode(graphicsGroupNode, "g1");
 		graphWriter.startGraph(BaseGraph.DIRECTED);
 		{
@@ -195,7 +197,7 @@ public class GraphMLWriterTest {
 		graphWriter.endNode(graphicsGroupNode);
 		PolyLineEdge
 			edgeGraphics = new PolyLineEdge();
-		edgeGraphics.lineType = LineType.DASHED;
+		edgeGraphics.lineStyle.type = LineType.DASHED;
 		EdgeLabel edgeLabel = new EdgeLabel("flow");
 		edgeGraphics.addLabel(edgeLabel);
 
@@ -217,19 +219,24 @@ public class GraphMLWriterTest {
 		dataShape.geometry.width = 250d;
 		dataShape.geometry.height = 30d;
 		dataShape.shape.shapeType = ShapeType.PARALLELOGRAM;
+		dataShape.addLabel(new NodeLabel());
 		YedNode<ShapeNode> dataNode = new YedNode<>(dataShape);
+
 		ShapeNode taskShape = new ShapeNode();
-		YedNode<ShapeNode> taskNode = new YedNode<>(taskShape);
 		taskShape.shape.shapeType = ShapeType.HEXAGON;
 		taskShape.fill.color = "#00ff00";
 		taskShape.geometry.width = 150d;
 		taskShape.geometry.height = 30d;
-		PolyLineEdge
-			edgeGraphics = new PolyLineEdge();
+		taskShape.addLabel(new NodeLabel());
+		YedNode<ShapeNode> taskNode = new YedNode<>(taskShape);
+
+		
 		YedEdge<PolyLineEdge>
-			edge = new YedEdge<>(edgeGraphics);
+			edge = new YedEdge<>(new PolyLineEdge());
+		
 		GraphWriter graphWriter = new GraphWriter(new FileOutputStream("target/big.graphml"),
 				StandardCharsets.UTF_8.name());
+		
 		graphWriter.startDocument();
 		graphWriter.writeKeys(Arrays.asList(YedKeys.values()));
 

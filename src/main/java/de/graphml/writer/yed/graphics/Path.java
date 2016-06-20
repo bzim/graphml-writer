@@ -15,50 +15,24 @@
  * limitations under the License.
  */
 package de.graphml.writer.yed.graphics;
-import java.util.ArrayList;
-import java.util.List;
 
 import de.graphml.writer.model.ElementWriter;
 import de.graphml.writer.yed.YedConstants;
-import de.graphml.writer.yed.style.ArrowStyle;
 
-public class PolyLineEdge implements EdgeGraphics, YedConstants{
-	public Path path = new Path();
-	public LineStyle lineStyle = new LineStyle();
-	public List<EdgeLabel> labels;
-	public ArrowStyle source = ArrowStyle.NONE;
-	public ArrowStyle target = ArrowStyle.STANDARD;
+public class Path implements LeafRenderable, YedConstants {
+	public Double sx=0d;
+	public Double sy=0d;
+	public Double tx=0d;
+	public Double ty=0d;
 
 	@Override
 	public void writeTo(ElementWriter w) {
-		w.startElement(Y, "PolyLineEdge");
-
-		path.writeTo(w);
-		lineStyle.writeTo(w);
-
-		w.startElement(Y, "Arrows");
-		w.writeAttribute("source", source.value);
-		w.writeAttribute("type", "line");
-		w.writeAttribute("target", target.value);
-		w.endElement();		
-		
-		if (labels != null){
-			for (EdgeLabel label: labels){
-				label.writeTo(w);
-			}
-		}
-		
-		w.startElement(Y, "BendStyle");
-		w.writeAttribute("smoothed", false);
-		w.endElement();		
-		
+		w.startElement(Y, "Path");
+		w.writeAttribute("sx", sx);
+		w.writeAttribute("sy", sy);
+		w.writeAttribute("tx", tx);
+		w.writeAttribute("ty", ty);
 		w.endElement();
 	}
-	
-	public void addLabel(EdgeLabel label){
-		if (labels == null){
-			labels = new ArrayList<>();
-		}
-		labels.add(label);
-	}
+
 }
