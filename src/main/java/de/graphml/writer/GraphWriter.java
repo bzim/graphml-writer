@@ -17,6 +17,7 @@
 package de.graphml.writer;
 
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 import javax.xml.stream.XMLOutputFactory;
@@ -35,10 +36,15 @@ public class GraphWriter {
 	protected int openElements = 0;
 	protected int idSequence;
 	protected final ElementWriter elementWriter = new InternalWriter();
-	public GraphWriter(OutputStream fileOutputStream, String name) {
+	protected final String encoding;
+	public GraphWriter(OutputStream out){
+		this(out, StandardCharsets.UTF_8.name());
+	}
+	public GraphWriter(OutputStream out, String encoding) {
+		this.encoding = encoding;
 		XMLOutputFactory xof = XMLOutputFactory.newInstance();
 		try {
-			xtw = xof.createXMLStreamWriter(fileOutputStream, name);
+			xtw = xof.createXMLStreamWriter(out, encoding);
 		} catch (XMLStreamException e) {
 			throw new RuntimeException(e);
 		}
@@ -69,8 +75,7 @@ public class GraphWriter {
 
 	public void startDocument() {
 		try {
-			xtw.writeStartDocument("utf-8", "1.0");
-			xtw.setPrefix("html", "http://www.w3.org/TR/REC-html40");
+			xtw.writeStartDocument(encoding, "1.0");
 			elementWriter.startElement("graphml");
 			xtw.writeNamespace("xmlns", "http://graphml.graphdrawing.org/xmlns");
 			xtw.writeNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");

@@ -49,7 +49,6 @@ public class TestUtils {
 	    Transformer xformer = TransformerFactory.newInstance().newTransformer();
 	    xformer.setOutputProperty(OutputKeys.METHOD, "xml");
 	    xformer.setOutputProperty(OutputKeys.INDENT, "yes");
-	    xformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 	    Source source = new DOMSource(document);
 	    Result result = new StreamResult(new File(file));
 	    xformer.transform(source, result);
