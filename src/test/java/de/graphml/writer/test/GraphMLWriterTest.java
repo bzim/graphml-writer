@@ -118,6 +118,8 @@ public class GraphMLWriterTest {
 
 		graphWriter.edge(edge, graphWriter.getNextId(), "1", "2");
 		graphWriter.edge(edge, graphWriter.getNextId(), "2", "3");
+		edge.edgeGraphics.path.addPoint(200d, 220d);
+		edge.edgeGraphics.path.addPoint(200d, 320d);
 		graphWriter.edge(edge, graphWriter.getNextId(), "3", "4");
 		graphWriter.endGraph(BaseGraph.DIRECTED);
 		graphWriter.endDocument();

@@ -16,6 +16,9 @@
  */
 package de.graphml.writer.yed.graphics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.graphml.writer.model.ElementWriter;
 import de.graphml.writer.yed.YedConstants;
 
@@ -24,6 +27,17 @@ public class Path implements LeafRenderable, YedConstants {
 	public Double sy=0d;
 	public Double tx=0d;
 	public Double ty=0d;
+	
+	private List<Point>points;
+	
+	public static class Point{
+		public Point(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
+		public double x;
+		public double y;
+	}
 
 	@Override
 	public void writeTo(ElementWriter w) {
@@ -32,7 +46,26 @@ public class Path implements LeafRenderable, YedConstants {
 		w.writeAttribute("sy", sy);
 		w.writeAttribute("tx", tx);
 		w.writeAttribute("ty", ty);
+		if (points != null){
+			for (Point point: points){
+				w.startElement(Y, "Point");
+				w.writeAttribute("x", point.x);
+				w.writeAttribute("y", point.y);
+				w.endElement();
+			}
+		}
 		w.endElement();
 	}
-
+	public void addPoint(double x, double y){
+		if (points == null){
+			points = new ArrayList<>();
+		}
+		points.add(new Point(x,y));
+	}
+	
+	public void clearPoints(){
+		if (points != null){
+			points.clear();
+		}
+	}
 }
