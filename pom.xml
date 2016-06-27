@@ -23,11 +23,12 @@
 		<connection>scm:git:git@github.com:bzim/graphml-writer.git</connection>
 		<developerConnection>scm:git:git@github.com:bzim/graphml-writer.git</developerConnection>
 		<url>git@github.com:bzim/graphml-writer.git</url>
-	  <tag>graphml-writer-0.0.3</tag>
-  </scm>
+		<tag>graphml-writer-0.1.1</tag>
+	</scm>
 	<properties>
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven-compiler-plugin.version>2.5.1</maven-compiler-plugin.version>
 	</properties>
 	<distributionManagement>
 		<snapshotRepository>
@@ -44,6 +45,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
